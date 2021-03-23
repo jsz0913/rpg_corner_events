@@ -14,7 +14,10 @@ bool FixedDistinctQueue::isFull() const
 {
   return (queue_.size() >= queue_max_);
 }
-
+// prev  1  2  3  4 ...
+// next -1  0  1  2 ...
+//       0  1  2  3
+// 第一个window设为0
 void FixedDistinctQueue::addNew(int x, int y)
 {
   // queue full?
@@ -53,12 +56,12 @@ void FixedDistinctQueue::addNew(int x, int y)
 
         window_(x, y) = place;
       }
-    }
+    }// if (window_(x, y) < 0)
     else
     {
       // link neighbors of old event in queue
       const int place = window_(x, y);
-
+      // 将其前缀和后缀连接
       if (queue_[place].next >= 0 && queue_[place].prev >= 0)
       {
         queue_[queue_[place].prev].next = queue_[place].next;
@@ -75,8 +78,8 @@ void FixedDistinctQueue::addNew(int x, int y)
         }
       }
       queue_[first_].prev = place;
-
       queue_[place].prev = -1;
+      
       if (first_ != place)
       {
         queue_[place].next = first_;
@@ -85,6 +88,7 @@ void FixedDistinctQueue::addNew(int x, int y)
       first_ = place;
     }
   }
+  // full
   else
   {
     // is window empty at location
@@ -96,11 +100,13 @@ void FixedDistinctQueue::addNew(int x, int y)
 
       // update queue
       queue_[queue_[last_].prev].next = -1;
+      
       queue_[last_].x = x;
       queue_[last_].y = y;
       queue_[last_].next = first_;
       const int second_last = queue_[last_].prev;
       queue_[last_].prev = -1;
+      
       queue_[first_].prev = last_;
       first_ = last_;
       last_ = second_last;
