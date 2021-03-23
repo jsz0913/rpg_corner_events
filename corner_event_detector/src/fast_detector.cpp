@@ -43,12 +43,13 @@ bool FastDetector::isFeature(const dvs_msgs::Event &e)
   }
 
   bool found_streak = false;
-
+  // 16个点
   for (int i=0; i<16; i++)
   {
     for (int streak_size = 3; streak_size<=6; streak_size++)
     {
       // check that streak event is larger than neighbor
+      // 为的是 0 跟 15 1 跟 0
       if (sae_[pol](e.x+circle3_[i][0], e.y+circle3_[i][1]) <  sae_[pol](e.x+circle3_[(i-1+16)%16][0], e.y+circle3_[(i-1+16)%16][1]))
         continue;
 
