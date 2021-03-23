@@ -64,7 +64,7 @@ bool FastDetector::isFeature(const dvs_msgs::Event &e)
         if (tj < min_t)
           min_t = tj;
       }
-
+      // 剩余部分没有值比弧内值大
       bool did_break = false;
       for (int j=streak_size; j<16; j++)
       {
