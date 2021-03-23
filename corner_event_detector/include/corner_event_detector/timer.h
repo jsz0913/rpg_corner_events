@@ -68,7 +68,7 @@ public:
    }
 
 protected:
-
+  // using default_clock_t = std::chrono::_V2::high_resolution_clock;
   details::time_point<details::default_clock_t, unit> start_;
 
   template <typename... Args>
@@ -80,7 +80,7 @@ protected:
 
   template <typename... Args>
   auto cast(Args&&... args) ->
-    decltype(std::chrono::time_point_cast<unit>(std::forward<Args>(args)...))
+    (std::chrono::time_point_cast<unit>(std::forward<Args>(args)...))
   {
     return std::chrono::time_point_cast<unit>(std::forward<Args>(args)...);
   }
