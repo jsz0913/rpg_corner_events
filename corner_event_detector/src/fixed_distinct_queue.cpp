@@ -17,9 +17,9 @@ bool FixedDistinctQueue::isFull() const
 }
 // prev  1  2  3  4 ...
 // next -1  0  1  2 ...
-//       0  1  2  3
 // 第一个window设为0
-//  next代表比它更老的事件
+// next代表比它更老的事件
+// first代表最新的事件，last代表最老的事件
 void FixedDistinctQueue::addNew(int x, int y)
 {
   // queue full?
