@@ -71,6 +71,7 @@ void FixedDistinctQueue::addNew(int x, int y)
       }
 
       // relink first and last
+      // 重新保持 上一个最新事件的prev为当前place
       if (place == last_)
       {
         if (queue_[place].prev >= 0)
@@ -81,7 +82,7 @@ void FixedDistinctQueue::addNew(int x, int y)
       }
       queue_[first_].prev = place;
       queue_[place].prev = -1;
-      
+      // 当 first_ == place 不用更新next 即它前一个
       if (first_ != place)
       {
         queue_[place].next = first_;
