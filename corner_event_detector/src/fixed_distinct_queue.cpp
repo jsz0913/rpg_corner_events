@@ -2,7 +2,8 @@
 
 namespace corner_event_detector
 {
-
+// 9 25
+// 最新的25
 FixedDistinctQueue::FixedDistinctQueue(int window, int queue) :
   first_(-1), last_(-1), queue_max_(queue)
 {
