@@ -44,6 +44,8 @@ bool FastDetector::isFeature(const dvs_msgs::Event &e)
 
   bool found_streak = false;
   // 16个点
+  // 每个点开始，确定合适的streak_size，最低要求，两个弧边比旁边大
+  //  之后保证内部最小值大于外部值
   for (int i=0; i<16; i++)
   {
     for (int streak_size = 3; streak_size<=6; streak_size++)
